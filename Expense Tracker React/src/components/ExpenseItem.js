@@ -1,21 +1,18 @@
+import './ExpenseItem.css'
 function ExpenseItem() {
   return (
-    <div>
-      <div>
+    <div className='expense-item '>
+      <div >
         {" "}
-        <h1> Expense Item </h1>{" "}
+        <h1 > 04 oct  </h1>{" "}
       </div>
       <div>
         {" "}
-        <h2>Food Rs 10</h2>
+        <h2 className='expense-item__description'>Food</h2>
       </div>
       <div>
         {" "}
-        <h2>Petrol Rs 100</h2>
-      </div>
-      <div>
-        {" "}
-        <h2>Movie Rs 110</h2>
+        <h2 className='expense-item__price'>100Rs</h2>
       </div>
     </div>
   );
