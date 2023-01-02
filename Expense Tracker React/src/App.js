@@ -1,4 +1,5 @@
-import ExpenseItem from "./components/ExpenseItem";
+import Expenses from './components/Expenses/Expenses';
+
 function App() {
   const expenses = [
     {
@@ -37,44 +38,13 @@ function App() {
       location: " Greatern Noida ",
     },
   ];
-  return expenses.map((val) => { // here you return the new array created by map
-    return  <div>
-    <ExpenseItem
-      title={val.title}
-      date={val.date}
-      location={val.location}
-      amount={val.amount}
-    ></ExpenseItem>
-    </div>
-    })
-  // return (
-  //   <div>
-  //     <ExpenseItem
-  //       title={expenses[0].title}
-  //       date={expenses[0].date}
-  //       location={expenses[0].location}
-  //       amount={expenses[0].amount}
-  //     ></ExpenseItem>
-  //     <ExpenseItem
-  //       title={expenses[1].title}
-  //       date={expenses[1].date}
-  //       location={expenses[1].location}
-  //       amount={expenses[1].amount}
-  //     ></ExpenseItem>
-  //     <ExpenseItem
-  //       title={expenses[2].title}
-  //       date={expenses[2].date}
-  //       location={expenses[2].location}
-  //       amount={expenses[2].amount}
-  //     ></ExpenseItem>
-  //     <ExpenseItem
-  //       title={expenses[3].title}
-  //       date={expenses[3].date}
-  //       location={expenses[3].location}
-  //       amount={expenses[3].amount}
-  //     ></ExpenseItem>
-  //   </div>
-  // );
-}
 
+  return (
+    <div>
+      <h2>Let's get started!</h2>
+      <Expenses items={expenses} />
+    </div>
+  );
+
+}
 export default App;
