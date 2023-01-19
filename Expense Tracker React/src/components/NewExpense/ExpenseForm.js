@@ -3,7 +3,7 @@ import './ExpenseForm.css';
 
 
 
-export default function ExpenseForm() {
+export default function ExpenseForm(props) {
   const [entertitle, setentertitle] = useState('');
   const [enterAmt, setenterAmt] = useState('');
   const [enterdate, setenterdate] = useState('');
@@ -23,10 +23,13 @@ export default function ExpenseForm() {
           event.preventDefault();
           const Expensedata={
             title: entertitle,
-            amt: enterAmt,
+            amount: enterAmt,
             date: new Date(enterdate)
           }
-     console.log(Expensedata);
+     props.onsubmitexpensedata(Expensedata);
+     setentertitle('');
+     setenterAmt('');
+     setenterdate('');
 
        
            
@@ -41,7 +44,7 @@ export default function ExpenseForm() {
     <div className='new-expense__controls'>
       <div className='new-expense__control'>
         <label>Title</label>
-        <input type='text' onChange={titleChangeHandler} />
+        <input type='text' value={entertitle} onChange={titleChangeHandler} />
       </div>
       <div className='new-expense__control'>
         <label>Amount</label>
@@ -50,6 +53,7 @@ export default function ExpenseForm() {
           min='0.01'
           step='0.01'
           onChange={amountChangeHandler}
+          value={enterAmt}
         />
       </div>
       <div className='new-expense__control'>
@@ -58,6 +62,7 @@ export default function ExpenseForm() {
           type='date'
           min='2019-01-01'
           max='2022-12-31'
+          value={enterdate}
           onChange={dateChangeHandler}
         />
       </div>

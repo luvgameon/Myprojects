@@ -1,5 +1,4 @@
-import React from 'react'
-import ExpenseForm from './components/NewExpense/ExpenseForm';
+import React,{useState} from 'react'
 
 import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
@@ -25,20 +24,27 @@ const App = () => {
       amount: 450,
       date: new Date(2021, 5, 12),
     },
+    {
+      id: 'e5',
+      title: 'game(Wooden)',
+      amount: 45,
+      date: new Date(2021, 5, 12),
+    },
   ];
+  const [exp, setexp] = useState(expenses);
 
-  // return React.createElement(
-  //   'div',
-  //   {},
-  //   React.createElement('h2', {}, "Let's get started!"),
-  //   React.createElement(Expenses, { items: expenses })
-  // );
+  const myfun=(exp)=>{
+   setexp((prevState)=>{
+    return [exp, ...prevState]})
+    console.log(exp);
+
+  };
 
   return (
     <div>
       <h2>Let's get started!</h2>
-     <NewExpense/>
-      <Expenses items={expenses} />
+     <NewExpense addexpense={myfun}/>
+      <Expenses items={exp} />
       
     </div>
   );
