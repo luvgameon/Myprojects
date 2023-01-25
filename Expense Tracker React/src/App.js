@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 
 import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
+
 const Dummy_data = [
   {
     id: 'e1',
@@ -41,13 +42,17 @@ const App = () => {
 
   };
 
+ 
   return (
-    <div>
-      <h2>Let's get started!</h2>
+   <>
+     
+     
+      
      <NewExpense addexpense={addnewExpense}/>
       <Expenses items={exp} />
-      
-    </div>
+
+</> 
+    
   );
 }
 

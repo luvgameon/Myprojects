@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 
 import ExpenseForm from './ExpenseForm';
 import './NewExpense.css';
@@ -10,14 +10,25 @@ const NewExpense = (props) => {
     ...enteredexpensedata,
     
     };
+    setstatus(false);
    
     props.addexpense(expensedata);
 
   };
+  const [status, setstatus] = useState(false);
+  const startediting=()=>{
+    setstatus(true);
+
+  }
+  const stopediting=()=>{
+    setstatus(false);
+  }
+  
   
   return (
     <div className='new-expense'>
-      <ExpenseForm onsubmitexpensedata={myfun}/>
+      {!status && <button onClick={startediting}>Add New Expense</button>}
+      {status && <ExpenseForm onsubmitexpensedata={myfun} onCancel={stopediting}/>}
     </div>
   );
   
