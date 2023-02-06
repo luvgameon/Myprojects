@@ -10,7 +10,7 @@ export default function Showuser(props) {
    <Card className={classes.users}>
     <ul >
         {props.users.map((user)=>(
-            <li key={user.id}>{user.name} ({user.age} Years Old)</li>
+            <li key={user.id}>{user.name} ({user.age} Years Old) <br/> {user.clgName} College</li>
             ))}
 
     </ul>

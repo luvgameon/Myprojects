@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{ useState} from 'react';
 
 import Card from '../UI/Card';
 import Button from '../UI/Button';
@@ -9,13 +9,17 @@ import Wrapper from '../Helpers/Wrapper';
 
 
 const AddUser = (props) => {
+  // const clgnameref=useRef();
+  // const clgname=clgnameref.current.value;
+
   const [username, setusername] = useState('');
   const [age, setage] = useState('');
+  const [clgname, setclgname] = useState('');
   const [error,seterror]=useState();
 
   const addUserHandler = (event) => {
     event.preventDefault();
-    if(username.trim().length===0 || age.trim().length===0){
+    if(username.trim().length===0 || age.trim().length===0 || clgname.trim().length===0 ){
       seterror({
         title:"Enter A Valid Input",
         msg:'Please Enter correct age and Name'
@@ -29,9 +33,10 @@ const AddUser = (props) => {
       })
       return; 
     }
-    props.onAdduser(username,age);
+    props.onAdduser(username,age,clgname);
     setusername('');
     setage('');
+    // clgnameref.current.value='';
     
    
    
@@ -39,6 +44,10 @@ const AddUser = (props) => {
   };
   const changeusername=(event)=>{
     setusername(event.target.value);
+
+  }
+  const changeclgname=(event)=>{
+    setclgname(event.target.value);
 
   }
   const changeage=(event)=>{
@@ -59,6 +68,8 @@ const AddUser = (props) => {
         <input id="username" type="text" value={username} onChange={changeusername}/>
         <label htmlFor="age" >Age Years</label>
         <input id="age" type="number" value={age} onChange={changeage}/>
+        <label htmlFor="clg" >College Name</label>
+        <input id="clg" type="text" value={clgname} onChange={changeclgname}/>
         <Button type='submit' > Add User</Button>
       </form>
     </Card>

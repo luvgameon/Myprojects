@@ -5,11 +5,11 @@ import Showuser from './Components/Users/ShowUser';
 
 function App() {
   const [userList, setuserList] = useState([]);
-  const addUserHandler=(uName,uAge)=>{
+  const addUserHandler=(uName,uAge,clg)=>{
     setuserList((prevdetails)=>{
       return [
         ...prevdetails,
-        {name:uName,age:uAge,id:Math.random().toString()}
+        {name:uName,age:uAge,clgName:clg,id:Math.random().toString()}
       ];
     });
 
