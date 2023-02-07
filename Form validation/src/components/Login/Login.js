@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
@@ -9,22 +9,31 @@ const Login = (props) => {
   const [emailIsValid, setEmailIsValid] = useState();
   const [enteredPassword, setEnteredPassword] = useState('');
   const [passwordIsValid, setPasswordIsValid] = useState();
+  const [enteredclgname, setenteredclgname] = useState('');
+  const [clgnameIsValid, setclgnameIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
+  useEffect(()=>{
+    setFormIsValid(
+      enteredEmail.includes('@') && enteredPassword.trim().length > 6 && enteredclgname.trim().length>0
+    );
+
+  },[enteredEmail,enteredPassword,enteredclgname])
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
 
-    setFormIsValid(
-      event.target.value.includes('@') && enteredPassword.trim().length > 6
-    );
+   
+  };
+  const clgChangeHandler = (event) => {
+    setenteredclgname(event.target.value);
+
+   
   };
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
 
-    setFormIsValid(
-      event.target.value.trim().length > 6 && enteredEmail.includes('@')
-    );
+  
   };
 
   const validateEmailHandler = () => {
@@ -34,10 +43,13 @@ const Login = (props) => {
   const validatePasswordHandler = () => {
     setPasswordIsValid(enteredPassword.trim().length > 6);
   };
+  const validateclgNameHandler = () => {
+    setclgnameIsValid(enteredclgname.trim().length > 0);
+  };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(enteredEmail, enteredPassword);
+    props.onLogin(enteredEmail, enteredPassword,enteredclgname);
   };
 
   return (
@@ -55,6 +67,20 @@ const Login = (props) => {
             value={enteredEmail}
             onChange={emailChangeHandler}
             onBlur={validateEmailHandler}
+          />
+        </div>
+        <div
+          className={`${classes.control} ${
+            clgnameIsValid === false ? classes.invalid : ''
+          }`}
+        >
+          <label htmlFor="clgname">College Name</label>
+          <input
+            type="text"
+            id="clgname"
+            value={enteredclgname}
+            onChange={clgChangeHandler}
+            onBlur={validateclgNameHandler}
           />
         </div>
         <div
