@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState,useEffect } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
@@ -40,6 +40,7 @@ const Login = (props) => {
   const [enteredclgname, setenteredclgname] = useState('');
   const [clgnameIsValid, setclgnameIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
+
   const [Emailstate,dispatchEmail]=useReducer(Emailreduce,{
     value:'',
     Isvalid:null,
@@ -48,30 +49,45 @@ const Login = (props) => {
     value:'',
     Isvalid:null,
   });
+  const {Isvalid:emailIsValid}=Emailstate;
+  const {Isvalid:passwordIsValid}=Passstate;
+  useEffect(()=>{
+    const identifer= setTimeout(()=>{
+      console.log('setform Running')
+      setFormIsValid(emailIsValid &&passwordIsValid && enteredclgname.trim().length>0)
+        
+
+    },500)
+    return ()=>{
+      console.log('clean UP')
+      clearTimeout(identifer);
+    }; 
+    
+  },[emailIsValid,passwordIsValid,enteredclgname])
  
 
   const emailChangeHandler = (event) => {
     dispatchEmail({type:"USER_INPUT",val:event.target.value})
-    setFormIsValid(
-      Emailstate.Isvalid && Passstate.Isvalid && enteredclgname.trim().length>0
-    );
+    // setFormIsValid(
+    //   Emailstate.Isvalid && Passstate.Isvalid && enteredclgname.trim().length>0
+    // );
 
    
   };
   const clgChangeHandler = (event) => {
     setenteredclgname(event.target.value);
-    setFormIsValid(
-      Emailstate.Isvalid && Passstate.Isvalid && event.target.value.trim().length>0
-    );
+    // setFormIsValid(
+    //   Emailstate.Isvalid && Passstate.Isvalid && event.target.value.trim().length>0
+    // );
 
    
   };
 
   const passwordChangeHandler = (event) => {
     dispatchPass({type:"USER_INPUT",val:event.target.value})
-    setFormIsValid(
-      Emailstate.Isvalid && Passstate.Isvalid && enteredclgname.trim().length>0
-    );
+    // setFormIsValid(
+    //   Emailstate.Isvalid && Passstate.Isvalid && enteredclgname.trim().length>0
+    // );
 
   
   };
